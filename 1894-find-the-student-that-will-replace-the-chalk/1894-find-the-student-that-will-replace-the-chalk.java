@@ -1,19 +1,14 @@
 class Solution {
-    public int chalkReplacer(int[] chalk, int initialChalkPieces) {
-        long totalChalkNeeded = 0;
-        for (int studentChalkUse : chalk) {
-            totalChalkNeeded += studentChalkUse;
+    public int chalkReplacer(int[] chalk, int k) {
+        long chalkSum=0;
+        for(int i=0;i<chalk.length;i++)
+            chalkSum+=chalk[i];
+        int remainingChalk=(int)(k%chalkSum);
+        for(int i=0;i<chalk.length;i++){
+            if(remainingChalk<chalk[i])
+                return i;
+            remainingChalk-=chalk[i];
         }
-        
-        int remainingChalk = (int)(initialChalkPieces % totalChalkNeeded);
-        
-        for (int studentIndex = 0; studentIndex < chalk.length; studentIndex++) {
-            if (remainingChalk < chalk[studentIndex]) {
-                return studentIndex;
-            }
-            remainingChalk -= chalk[studentIndex];
-        }
-        
-        return 0;  
+        return 0;
     }
 }
